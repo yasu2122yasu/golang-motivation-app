@@ -3,5 +3,6 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println("へローワールド")
+	n := "ハローワールド"
+	fmt.Println(n)
 }
