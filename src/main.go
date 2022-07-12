@@ -2,19 +2,26 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"os"
 )
 
-func foo() {
-	defer fmt.Println("World foo")
-
-	fmt.Println("Hello Hoo")
-}
-
 func main() {
-	file, _ := os.Open("./if.go")
+	file, err := os.Open("./if.go")
+	if err != nil {
+		log.Fatal("Erorr")
+	}
 	defer file.Close()
 	data := make([]byte, 100)
-	file.Read(data)
-	fmt.Println(string(data))
+	count, err := file.Read(data)
+	if err != nil {
+		log.Fatalln("error")
+	}
+	fmt.Println(count, string(data))
+
+	err = os.Chdir("test")
+	if err != nil {
+		log.Fatalln("error")
+	}
+
 }
