@@ -1,3 +1,5 @@
+//typeを作ってmethodをつけている。
+
 package main
 
 import "fmt"
