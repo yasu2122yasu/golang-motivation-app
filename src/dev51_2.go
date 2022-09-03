@@ -12,6 +12,8 @@ func main() {
 	fmt.Println(len(ch))
 	close(ch)
 
+	//forとrangeを回すときは、closeでchを一度閉じる必要がある。
+
 	for c := range ch {
 		fmt.Println(c)
 	}

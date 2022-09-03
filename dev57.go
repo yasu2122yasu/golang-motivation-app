@@ -6,6 +6,8 @@ import (
 	"time"
 )
 
+//sync.Mutexを書くことでエラーを回避している。
+
 type Counter struct {
 	v   map[string]int
 	mux sync.Mutex

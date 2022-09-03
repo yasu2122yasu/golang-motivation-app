@@ -5,6 +5,8 @@ import (
 	"time"
 )
 
+//time.Sleep内の時間を変更することで出力のタイミングを変更することができる。
+
 func goroutine1(ch chan string) {
 	for {
 		ch <- "packet from 1"

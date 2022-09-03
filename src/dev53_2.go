@@ -20,10 +20,14 @@ func consumer(ch chan int, wg *sync.WaitGroup) {
 	fmt.Println("#######################")
 }
 
+/*
+func main()内でsync.WaitGroup型のwgを作る
+*/
 func main() {
 	var wg sync.WaitGroup
 	ch := make(chan int)
 
+	//Addメソッドは終了するまで待ちたいゴルーチンの数だけAddを呼ぶ。
 	for i := 0; i < 10; i++ {
 		wg.Add(1)
 		go producer(ch, i)

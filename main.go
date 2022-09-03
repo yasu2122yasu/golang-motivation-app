@@ -1,8 +1,8 @@
 package main
 
 import (
-	"GoTo/mylib"
 	"fmt"
+	"mylib"
 )
 
 func main() {
