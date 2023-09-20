@@ -2,10 +2,26 @@ package main
 
 import (
 	"fmt"
-	"mylib"
+	"go_practice/database"
+	"go_practice/repository"
 )
 
 func main() {
-	s := []int{1, 2, 3, 4, 5}
-	fmt.Println(mylib.Average(s))
+    db := database.Connect()
+    defer db.Close()
+
+    err := db.Ping()
+
+    if err != nil {
+        fmt.Println("データベース接続失敗")
+        return
+    } else {
+        fmt.Println("データベース接続成功")
+    }
+
+		repo, err := repository.GetPersons()
+		// if err != nil{
+		// 	log.Fatal()
+		// }
+		fmt.Println(repo)
 }
