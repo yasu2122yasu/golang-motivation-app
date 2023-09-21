@@ -5,15 +5,16 @@ import (
 )
 
 type Person struct {
-	Id   int
-	Name string
-	Gender string
+	Id     int      `json:"id"`
+	Name   string   `json:"name"`
+	Gender string   `json:"gender"`
+	Saving int      `json:"saving"`
 }
 
 type TrashScanner struct{}
 
 func (TrashScanner) Scan(interface{}) error {
-    return nil
+		return nil
 }
 
 func GetPersons() ([]Person, error) {
@@ -21,7 +22,7 @@ func GetPersons() ([]Person, error) {
 	db := database.Connect()
 
 	// SQLの実行
-	rows, err := db.Query("SELECT * FROM test1")
+	rows, err := db.Query("SELECT * FROM user")
 	if err != nil {
 		return nil, err
 	}
@@ -32,7 +33,7 @@ func GetPersons() ([]Person, error) {
 	for rows.Next() {
 		var p Person
 
-		err := rows.Scan(&p.Id, &p.Name, &p.Gender, TrashScanner{}, TrashScanner{}, TrashScanner{})
+		err := rows.Scan(&p.Id, &p.Name, &p.Gender,&p.Saving, TrashScanner{}, TrashScanner{}, TrashScanner{})
 		if err != nil {
 			return nil, err
 		}
