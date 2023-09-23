@@ -8,7 +8,7 @@ type Person struct {
 	Id     int      `json:"id"`
 	Name   string   `json:"name"`
 	Gender string   `json:"gender"`
-	Saving int      `json:"saving"`
+	Saving string      `json:"saving"`
 }
 
 type TrashScanner struct{}
