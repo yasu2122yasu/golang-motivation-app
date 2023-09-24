@@ -4,7 +4,7 @@ import (
 	"go_practice/database"
 )
 
-type IGetPersonsInterface interface {
+type IIndexSavingRepository interface {
 	GetPersons() ([]Person, error)
 }
 
