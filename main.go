@@ -12,7 +12,6 @@ import (
 	"github.com/gorilla/mux"
 )
 
-// グローバル変数
 var savingService service.IIndexSavingService
 
 func NewRouting(data database.ConnectDatabase){
