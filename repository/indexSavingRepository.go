@@ -4,11 +4,26 @@ import (
 	"go_practice/database"
 )
 
+type IGetPersonsInterface interface {
+	GetPersons() ([]Person, error)
+}
+
+type IndexSavingRepository struct {
+	db database.IConnectDatabase
+}
+
+// リポジトリの作成
+func NewIndexSavingRepository(db database.IConnectDatabase) *IndexSavingRepository {
+	return &IndexSavingRepository{
+		db,
+	}
+}
+
 type Person struct {
 	Id     int      `json:"id"`
 	Name   string   `json:"name"`
 	Gender string   `json:"gender"`
-	Saving string      `json:"saving"`
+	Saving string   `json:"saving"`
 }
 
 type TrashScanner struct{}
@@ -17,9 +32,9 @@ func (TrashScanner) Scan(interface{}) error {
 		return nil
 }
 
-func GetPersons() ([]Person, error) {
+func (isr IndexSavingRepository) GetPersons() ([]Person, error) {
 	// データベースのハンドルを取得する
-	db := database.Connect()
+	db, err := isr.db.Connect()
 
 	// SQLの実行
 	rows, err := db.Query("SELECT * FROM user")

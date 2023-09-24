@@ -5,10 +5,23 @@ import (
 	"log"
 )
 
+type IIndexSavingService interface {
+	IndexSaving()([]repository.Person, error)
+}
 
-func IndexSavingService() ([]repository.Person, error){
+type IndexSavingService struct {
+	repo repository.IGetPersonsInterface
+}
 
-	repo, err := repository.GetPersons()
+// サービスの作成
+func NewIndexSavingService(repo repository.IGetPersonsInterface) *IndexSavingService {
+	return &IndexSavingService{
+		repo,
+	}
+}
+
+func (iss IndexSavingService) IndexSaving() ([]repository.Person, error){
+	repo, err := iss.repo.GetPersons()
 
 	if err != nil {
 		log.Fatal()

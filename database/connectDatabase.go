@@ -5,16 +5,26 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/joho/godotenv"
-
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/joho/godotenv"
 )
 
-func Connect() *sql.DB {
+type IConnectDatabase interface {
+    Connect() (*sql.DB, error)
+}
+
+type ConnectDatabase struct{}
+
+func NewConnectDatabase() ConnectDatabase {
+    return ConnectDatabase{}
+}
+
+func (c ConnectDatabase) Connect() (*sql.DB, error) {
     err := godotenv.Load()
     if err != nil {
         fmt.Println(err.Error())
     }
+
 
     user := os.Getenv("DB_USER")
     password := os.Getenv("DB_PASSWORD")
@@ -27,5 +37,5 @@ func Connect() *sql.DB {
     if err != nil {
         fmt.Println(err.Error())
     }
-    return db
+    return db,err
 }
