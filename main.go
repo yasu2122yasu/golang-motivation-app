@@ -23,14 +23,10 @@ func NewRouting(data database.ConnectDatabase){
 	}
 	defer db.Close()
 
-	if err = db.Ping(); err != nil {
-		log.Fatalf("データベース接続失敗: %v", err)
-		return
-	}
 	fmt.Println("データベース接続成功")
 
 	// リポジトリとサービスのインスタンスを作成
-    savingService = service.NewIndexSavingService(repository.NewIndexSavingRepository(data))
+    savingService = service.NewIndexSavingService(repository.NewIndexPersonRepository(data))
 }
 
 func indexSaving(w http.ResponseWriter, r *http.Request) {

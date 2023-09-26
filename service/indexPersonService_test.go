@@ -12,11 +12,11 @@ import (
 func TestNewIndexSavingService(t *testing.T) {
 	ctrl := gomock.NewController(t)
 	defer ctrl.Finish()
-	isrMock := mock_repository.NewMockIIndexSavingRepository(ctrl)
+	isrMock := mock_repository.NewMockIIndexPersonRepository(ctrl)
 
 	tests := []struct {
 		name string
-		args repository.IIndexSavingRepository
+		args repository.IIndexPersonRepository
 		want *IndexSavingService
 	}{
 		{
@@ -37,7 +37,7 @@ func TestNewIndexSavingService(t *testing.T) {
 func TestIndexSavingService_IndexSaving(t *testing.T) {
 	ctrl := gomock.NewController(t)
 	defer ctrl.Finish()
-	isrMock := mock_repository.NewMockIIndexSavingRepository(ctrl)
+	isrMock := mock_repository.NewMockIIndexPersonRepository(ctrl)
 
 	// モックの期待値を設定
 	expectedPersons := []repository.Person{
