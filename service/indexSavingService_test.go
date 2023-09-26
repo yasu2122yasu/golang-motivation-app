@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-func TestIndexSavingService(t *testing.T) {
+func TestIndexPersonService(t *testing.T) {
 	tests := []struct {
 		name    string
 		want    []repository.Person
@@ -27,7 +27,7 @@ func TestIndexSavingService(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := IndexSavingService()
+			got, err := IndexPersonService()
 			if (err != nil) != tt.wantErr {
 				t.Errorf("IndexSavingService.IndexSaving() error = %v, wantErr %v", err, tt.wantErr)
 				return

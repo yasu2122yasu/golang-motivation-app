@@ -8,9 +8,10 @@ type Person struct {
 	Id     int      `json:"id"`
 	Name   string   `json:"name"`
 	Gender string   `json:"gender"`
-	Saving string      `json:"saving"`
+	Saving string   `json:"saving"`
 }
 
+// Person構造体のフィールド数とRDBのカラム数が異なるとエラーが出るため実装
 type TrashScanner struct{}
 
 func (TrashScanner) Scan(interface{}) error {

@@ -12,7 +12,7 @@ import (
 )
 
 func indexSaving(w http.ResponseWriter, r *http.Request) {
-    iss, err := service.IndexSavingService()
+    iss, err := service.IndexPersonService()
 
     if err != nil {
         log.Fatal()

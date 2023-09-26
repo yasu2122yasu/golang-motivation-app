@@ -6,7 +6,7 @@ import (
 )
 
 
-func IndexSavingService() ([]repository.Person, error){
+func IndexPersonService() ([]repository.Person, error){
 
 	repo, err := repository.GetPersons()
 
