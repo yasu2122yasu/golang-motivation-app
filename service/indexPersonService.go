@@ -10,11 +10,11 @@ type IIndexSavingService interface {
 }
 
 type IndexSavingService struct {
-	repo repository.IGetPersonsInterface
+	repo repository.IIndexPersonRepository
 }
 
 // サービスの作成
-func NewIndexSavingService(repo repository.IGetPersonsInterface) *IndexSavingService {
+func NewIndexSavingService(repo repository.IIndexPersonRepository) *IndexSavingService {
 	return &IndexSavingService{
 		repo,
 	}
