@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  backend:
+    container_name: motiva_backend
+    tty: true
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    env_file:
+      - ./database/.env
+    depends_on:
+      - database
+    volumes:
+      - type: bind
+        source: ./backend/app
+        target: /go/src
+    # M1チップの以外場合はコメントアウトする
+    platform: linux/amd64
+
+  database:
+    container_name: motiva_database
+    tty: true
+    build:
+      context: ./database
+      dockerfile: Dockerfile
+    # envファイルは現在のところ不使用
+    env_file:
+      - ./database/.env
+    environment:
+      - POSTGRES_DB=app
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - 5435:5432
+    volumes:
+      - ./database/initsql:/docker-entrypoint-initdb.d
+    # M1チップの以外場合はコメントアウトする
+    platform: linux/x86_64
+
+  # フロントエンドのコンテナ
+  frontend:
+    container_name: motiva_frontend
+    build: ./frontend
+    tty: true
+    working_dir: /usr/src/app
+    volumes:
+      - ./frontend/app:/usr/src/app
+    command: sh -c "yarn start"
+    ports:
+      - '3004:3000'
+    # M1チップの以外場合はコメントアウトする
+    platform: linux/x86_64s
+    # ホットリロードを有効化
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+volumes:
+  db-volumes:
