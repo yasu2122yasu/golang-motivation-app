@@ -1,0 +1,5 @@
+-- DBの作成
+DROP DATABASE IF EXISTS app;
+CREATE DATABASE app;
+-- DBを切り替え
+USE app;
